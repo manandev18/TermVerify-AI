@@ -5,7 +5,8 @@
 ## Features
 - **AI-Powered Extraction**: Automatically extracts relevant data points from term sheets.
 - **Validation**: Cross-checks extracted data against industry standards.
-- **Fraud Detection**: Identifies potential fraudulent activities with risk scoring.
+- **AI Based Suggestions**: Identifies errors and suggest changes that could be made.
+- **Risk and Credibility Score**: Gives Risk and Credibility scores on past performances of clients
 - **Email Integration**: Sends notifications on validation status and results.
 - **User Authentication**: Secure login and signup functionality.
 
