@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TermVerify AI - Login/Signup</title>
+    <style>
+      :root {
+        /* Main theme colors from TermVerify image */
+        --primary-color: #0e4975;
+        --primary-dark: #083654;
+        --secondary-color: #6c757d;
+        --background-color: #f8f9fa;
+        --text-color: #212529;
+        --light-color: #ffffff;
+        --border-color: #dee2e6;
+        --success-color: #28a745;
+        --error-color: #dc3545;
+        --accent-color: #2986cc;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--background-color);
+        color: var(--text-color);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Header styling based on TermVerify image */
+      header {
+        background-color: var(--light-color);
+        padding: 15px 40px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--primary-color);
+      }
+
+      .logo span {
+        color: var(--accent-color);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav li {
+        margin-left: 30px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 500;
+      }
+
+      .login-btn {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 10px 25px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      /* Main content area */
+      .hero-section {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 60px 40px;
+        flex: 0 0 auto;
+      }
+
+      .hero-section h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+
+      .hero-section p {
+        font-size: 18px;
+        max-width: 600px;
+        margin-bottom: 30px;
+      }
+
+      .main-content {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+      }
+
+      .container {
+        background-color: var(--light-color);
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 900px;
+        display: flex;
+        overflow: hidden;
+      }
+
+      .image-section {
+        flex: 1;
+        background-color: var(--primary-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding: 40px;
+        display: none;
+      }
+
+      .form-section {
+        flex: 1;
+        padding: 40px;
+      }
+
+      .tabs {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .tab {
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-bottom: 2px solid transparent;
+      }
+
+      .tab.active {
+        border-bottom: 2px solid var(--accent-color);
+        color: var(--accent-color);
+        font-weight: 600;
+      }
+
+      .form-content h2 {
+        margin-bottom: 20px;
+        color: var(--primary-color);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        transition: border-color 0.3s;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: var(--accent-color);
+      }
+
+      .form-check {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .form-check input {
+        margin-right: 10px;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.3s;
+        width: 100%;
+      }
+
+      .btn:hover {
+        background-color: var(--primary-dark);
+      }
+
+      .social-login {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .social-login p {
+        margin-bottom: 15px;
+        position: relative;
+      }
+
+      .social-login p::before,
+      .social-login p::after {
+        content: "";
+        display: inline-block;
+        width: 40%;
+        height: 1px;
+        background-color: var(--border-color);
+        position: absolute;
+        top: 50%;
+      }
+
+      .social-login p::before {
+        left: 0;
+      }
+
+      .social-login p::after {
+        right: 0;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .social-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid var(--border-color);
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .social-icon:hover {
+        background-color: rgba(14, 73, 117, 0.1);
+        border-color: var(--primary-color);
+      }
+
+      .form-content {
+        display: none;
+      }
+
+      .form-content.active {
+        display: block;
+      }
+
+      .links {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .links a {
+        color: var(--accent-color);
+        text-decoration: none;
+      }
+
+      .links a:hover {
+        text-decoration: underline;
+      }
+
+      .error-message {
+        color: var(--error-color);
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      @media screen and (min-width: 768px) {
+        .image-section {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header based on TermVerify AI design -->
+    <header>
+      <div class="logo">Term<span>Verify</span> AI</div>
+      <nav>
+        <ul>
+          <li><a href="./home.html">Home</a></li>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#" class="login-btn">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero section similar to the TermVerify landing page -->
+    <div class="hero-section">
+      <h1>AI-Powered Account Access</h1>
+      <p>
+        Secure login and signup process with our advanced AI technology. Get
+        real-time fraud detection and risk scoring to ensure your account
+        security.
+      </p>
+    </div>
+
+    <div class="main-content">
+      <div class="container">
+        <div class="image-section">
+          <h1>Welcome</h1>
+          <p>
+            We're excited to have you join our platform. Login or create a new
+            account to get started.
+          </p>
+        </div>
+        <div class="form-section">
+          <div class="tabs">
+            <div class="tab active" onclick="switchTab('login')">Sign In</div>
+            <div class="tab" onclick="switchTab('signup')">Sign Up</div>
+          </div>
+
+          <!-- Login Form -->
+          <div id="login" class="form-content active">
+            <h2>Sign in to your account</h2>
+            <form id="login-form">
+              <div class="form-group">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" required />
+                <div class="error-message" id="login-email-error">
+                  Please enter a valid email address
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" required />
+                <div class="error-message" id="login-password-error">
+                  Password is required
+                </div>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="remember-me" />
+                <label for="remember-me">Remember me</label>
+              </div>
+              <button type="submit" class="btn">Sign In</button>
+              <div class="links">
+                <a href="#">Forgot your password?</a>
+              </div>
+            </form>
+
+            <div class="social-login">
+              <p>Or sign in with</p>
+              <div class="social-icons">
+                <div class="social-icon">G</div>
+                <div class="social-icon">f</div>
+                <div class="social-icon">in</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Signup Form -->
+          <div id="signup" class="form-content">
+            <h2>Create a new account</h2>
+            <form id="signup-form">
+              <div class="form-group">
+                <label for="signup-name">Full Name</label>
+                <input type="text" id="signup-name" required />
+                <div class="error-message" id="signup-name-error">
+                  Please enter your name
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" required />
+                <div class="error-message" id="signup-email-error">
+                  Please enter a valid email address
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" required />
+                <div class="error-message" id="signup-password-error">
+                  Password must be at least 8 characters
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="signup-confirm-password">Confirm Password</label>
+                <input type="password" id="signup-confirm-password" required />
+                <div class="error-message" id="signup-confirm-password-error">
+                  Passwords do not match
+                </div>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="agree-terms" required />
+                <label for="agree-terms"
+                  >I agree to the <a href="#">Terms of Service</a> and
+                  <a href="#">Privacy Policy</a></label
+                >
+                <div class="error-message" id="agree-terms-error">
+                  You must agree to the terms
+                </div>
+              </div>
+              <button type="submit" class="btn">Create Account</button>
+            </form>
+
+            <div class="social-login">
+              <p>Or sign up with</p>
+              <div class="social-icons">
+                <div class="social-icon">G</div>
+                <div class="social-icon">f</div>
+                <div class="social-icon">in</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function switchTab(tab) {
+        // Update tabs
+        document.querySelectorAll(".tab").forEach((t) => {
+          t.classList.remove("active");
+        });
+        document
+          .querySelector(`.tab:nth-child(${tab === "login" ? 1 : 2})`)
+          .classList.add("active");
+
+        // Update form content
+        document.querySelectorAll(".form-content").forEach((content) => {
+          content.classList.remove("active");
+        });
+        document.getElementById(tab).classList.add("active");
+      }
+
+      // Basic form validation
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          let valid = true;
+
+          const email = document.getElementById("login-email");
+          const password = document.getElementById("login-password");
+
+          // Reset errors
+          document.querySelectorAll(".error-message").forEach((err) => {
+            err.style.display = "none";
+          });
+
+          // Email validation
+          if (!email.value || !email.value.includes("@")) {
+            document.getElementById("login-email-error").style.display =
+              "block";
+            valid = false;
+          }
+
+          // Password validation
+          if (!password.value) {
+            document.getElementById("login-password-error").style.display =
+              "block";
+            valid = false;
+          }
+
+          if (valid) {
+            try {
+              const response = await fetch(
+                "http://localhost:5000/api/auth/login",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    email: email.value,
+                    password: password.value,
+                  }),
+                }
+              );
+
+              const data = await response.json();
+
+              if (response.ok) {
+                // Store the token in local storage or session storage
+                localStorage.setItem("token", data.token);
+                alert("Login successful!");
+                // Redirect to another page or update the UI
+                window.location.href = "./upload_termsheet.html"; // Change this to your desired route
+              } else {
+                // Handle errors (e.g., invalid credentials)
+                alert(data.error || "Login failed. Please try again.");
+              }
+            } catch (error) {
+              console.error("Error during login:", error);
+              alert("An error occurred. Please try again later.");
+            }
+          }
+        });
+
+      document
+        .getElementById("signup-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          let valid = true;
+
+          const name = document.getElementById("signup-name");
+          const email = document.getElementById("signup-email");
+          const password = document.getElementById("signup-password");
+          const confirmPassword = document.getElementById(
+            "signup-confirm-password"
+          );
+          const agreeTerms = document.getElementById("agree-terms");
+
+          // Reset errors
+          document.querySelectorAll(".error-message").forEach((err) => {
+            err.style.display = "none";
+          });
+
+          // Name validation
+          if (!name.value) {
+            document.getElementById("signup-name-error").style.display =
+              "block";
+            valid = false;
+          }
+
+          // Email validation
+          if (!email.value || !email.value.includes("@")) {
+            document.getElementById("signup-email-error").style.display =
+              "block";
+            valid = false;
+          }
+
+          // Password validation
+          if (!password.value || password.value.length < 8) {
+            document.getElementById("signup-password-error").style.display =
+              "block";
+            valid = false;
+          }
+
+          // Confirm password validation
+          if (password.value !== confirmPassword.value) {
+            document.getElementById(
+              "signup-confirm-password-error"
+            ).style.display = "block";
+            valid = false;
+          }
+
+          // Terms agreement validation
+          if (!agreeTerms.checked) {
+            document.getElementById("agree-terms-error").style.display =
+              "block";
+            valid = false;
+          }
+          if (valid) {
+            try {
+              const response = await fetch(
+                "http://localhost:5000/api/auth/signup",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    name: name.value,
+                    email: email.value,
+                    password: password.value,
+                  }),
+                }
+              );
+
+              const data = await response.json();
+
+              if (response.ok) {
+                alert("Account created successfully!");
+                // Optionally redirect to login page or another page
+                window.location.href = "/upload_termsheet"; // Change this to your desired route
+              } else {
+                // Handle errors (e.g., user already exists)
+                alert(data.error || "Signup failed. Please try again.");
+              }
+            } catch (error) {
+              console.error("Error during signup:", error);
+              alert("An error occurred. Please try again later.");
+            }
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TermVerify AI | Upload Your Term Sheet</title>
+    <style>
+      /* Global Styles */
+      :root {
+        --primary-blue: #00395d;
+        --secondary-blue: #1b65a6;
+        --light-blue: #e6f2ff;
+        --accent-blue: #2d8cc2;
+        --white: #ffffff;
+        --light-grey: #f5f7fa;
+        --mid-grey: #e1e5ea;
+        --dark-grey: #4a4a4a;
+        --black: #333333;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      }
+
+      body {
+        background-color: var(--white);
+        color: var(--black);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 600;
+        line-height: 1.3;
+        margin-bottom: 20px;
+        color: var(--primary-blue);
+      }
+
+      h1 {
+        font-size: 2.8rem;
+      }
+
+      h2 {
+        font-size: 2.2rem;
+      }
+
+      h3 {
+        font-size: 1.8rem;
+      }
+
+      p {
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--secondary-blue);
+        transition: all 0.3s ease;
+      }
+
+      a:hover {
+        color: var(--accent-blue);
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-weight: 600;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-blue);
+        color: var(--white);
+        border: 2px solid var(--primary-blue);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--secondary-blue);
+        color: var(--white);
+        border-color: var(--secondary-blue);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        color: var(--primary-blue);
+        border: 2px solid var(--primary-blue);
+      }
+
+      .btn-secondary:hover {
+        background-color: var(--light-blue);
+      }
+
+      .section {
+        padding: 80px 0;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: var(--white);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+      }
+
+      .logo {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--primary-blue);
+      }
+
+      .logo span {
+        color: var(--secondary-blue);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin-left: 30px;
+      }
+
+      nav ul li a {
+        color: var(--dark-grey);
+        font-weight: 500;
+      }
+
+      nav ul li a:hover,
+      nav ul li a.active {
+        color: var(--primary-blue);
+      }
+
+      .mobile-toggle {
+        display: none;
+        cursor: pointer;
+      }
+
+      /* Upload Form Section */
+      .upload-section {
+        background: linear-gradient(
+          120deg,
+          var(--primary-blue) 0%,
+          var(--secondary-blue) 100%
+        );
+        padding: 180px 0 100px;
+        color: var(--white);
+      }
+
+      .upload-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .upload-text {
+        flex: 1;
+        padding-right: 40px;
+      }
+
+      .upload-text h1 {
+        color: var(--white);
+        margin-bottom: 25px;
+      }
+
+      .upload-text p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        color: var(--light-grey);
+      }
+
+      /* MODIFIED: Enhanced Upload Form with distinctive features */
+      .upload-form {
+        flex: 1;
+        position: relative;
+        background: linear-gradient(
+          145deg,
+          var(--white) 0%,
+          var(--light-blue) 100%
+        );
+        padding: 40px;
+        border-radius: 16px 16px 60px 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2),
+          0 5px 15px rgba(27, 101, 166, 0.2);
+        border-left: 5px solid var(--accent-blue);
+        transform: translateY(-10px);
+        overflow: hidden;
+      }
+
+      .corner-ribbon {
+        position: absolute;
+        top: 25px;
+        right: -50px;
+        transform: rotate(45deg);
+        background-color: var(--accent-blue);
+        color: white;
+        padding: 5px 40px;
+        font-size: 0.8rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .form-icon {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .form-icon i {
+        font-size: 3rem;
+        color: var(--primary-blue);
+        background-color: rgba(228, 240, 255, 0.7);
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(29, 101, 166, 0.2);
+      }
+
+      .upload-form h2 {
+        color: var(--primary-blue);
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+      }
+
+      .upload-form h2:after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background-color: var(--accent-blue);
+        border-radius: 3px;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--dark-grey);
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 1rem;
+        border: 1px solid var(--mid-grey);
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+
+      .form-control:focus {
+        border-color: var(--secondary-blue);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(29, 101, 166, 0.2);
+        background-color: var(--white);
+      }
+
+      .file-upload {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 200px;
+        border: 2px dashed var(--accent-blue);
+        border-radius: 8px;
+        background-color: rgba(228, 240, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+
+      .file-upload:hover {
+        border-color: var(--secondary-blue);
+        background-color: rgba(29, 101, 166, 0.1);
+        transform: translateY(-3px);
+      }
+
+      .file-upload i {
+        font-size: 3rem;
+        color: var(--primary-blue);
+        margin-bottom: 15px;
+      }
+
+      .file-upload input[type="file"] {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+      }
+
+      .file-upload-text {
+        text-align: center;
+      }
+
+      .upload-btn {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.1rem;
+        margin-top: 10px;
+        border-radius: 30px;
+        background: linear-gradient(
+          to right,
+          var(--primary-blue),
+          var(--secondary-blue)
+        );
+        border: none;
+        box-shadow: 0 4px 10px rgba(0, 57, 93, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .upload-btn:hover {
+        background: linear-gradient(
+          to right,
+          var(--secondary-blue),
+          var(--primary-blue)
+        );
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 57, 93, 0.4);
+      }
+
+      .upload-info {
+        margin-top: 20px;
+        color: var(--dark-grey);
+        font-size: 0.9rem;
+        padding: 15px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 8px;
+      }
+
+      .upload-info ul {
+        list-style-type: disc;
+        padding-left: 20px;
+        margin-top: 10px;
+      }
+
+      .upload-info li {
+        margin-bottom: 5px;
+      }
+
+      /* Steps Section */
+      .steps-section {
+        background-color: var(--light-grey);
+        padding: 60px 0;
+      }
+
+      .steps-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .step-image {
+        flex: 1;
+        padding-right: 40px;
+      }
+
+      .step-image img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .steps-content {
+        flex: 1;
+      }
+
+      .step-item {
+        display: flex;
+        margin-bottom: 30px;
+      }
+
+      .step-number {
+        background-color: var(--primary-blue);
+        color: var(--white);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        margin-right: 20px;
+        flex-shrink: 0;
+      }
+
+      .step-info h3 {
+        margin-bottom: 10px;
+      }
+
+      /* Footer Styles */
+      footer {
+        background-color: var(--primary-blue);
+        color: var(--white);
+        padding: 60px 0 30px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column h3 {
+        color: var(--white);
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background-color: var(--light-blue);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: var(--light-grey);
+        transition: all 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--white);
+        padding-left: 5px;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-bottom p {
+        font-size: 0.9rem;
+        color: var(--light-grey);
+        margin-bottom: 10px;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 1024px) {
+        .upload-container,
+        .steps-container {
+          flex-direction: column;
+        }
+
+        .upload-text,
+        .upload-form,
+        .step-image,
+        .steps-content {
+          flex: none;
+          width: 100%;
+          padding-right: 0;
+          margin-bottom: 40px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .section {
+          padding: 60px 0;
+        }
+
+        .upload-section {
+          padding: 150px 0 80px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-toggle {
+          display: block;
+          font-size: 1.5rem;
+          color: var(--primary-blue);
+        }
+
+        nav {
+          position: absolute;
+          top: 80px;
+          left: 0;
+          width: 100%;
+          background-color: var(--white);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-20px);
+          transition: all 0.3s ease;
+        }
+
+        nav.active {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+
+        nav ul {
+          flex-direction: column;
+        }
+
+        nav ul li {
+          margin: 0;
+          margin-bottom: 15px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        h1 {
+          font-size: 2.2rem;
+        }
+
+        .upload-form {
+          padding: 30px 20px;
+        }
+      }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <div class="container">
+        <div class="header-container">
+          <a href="index.html" class="logo">Term<span>Verify</span> AI</a>
+          <div class="mobile-toggle" id="mobileToggle">
+            <i class="fas fa-bars"></i>
+          </div>
+          <nav id="mainNav">
+            <ul>
+              <li><a href="./home.html">Home</a></li>
+              <li><a href="index.html#features">Features</a></li>
+              <li><a href="index.html#how-it-works">How It Works</a></li>
+              <li><a href="index.html#team">Team</a></li>
+              <li><a href="#" class="btn btn-primary">Login</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Upload Section -->
+    <section class="upload-section">
+      <div class="container">
+        <div class="upload-container">
+          <div class="upload-text">
+            <h1>Upload Your Term Sheet</h1>
+            <p>
+              Start the validation process by uploading your term sheet
+              document. Our AI technology will analyze and extract all relevant
+              data points for validation.
+            </p>
+            <p>
+              We support a wide range of document formats including PDF, DOC,
+              DOCX, TXT, and more.
+            </p>
+          </div>
+          <div class="upload-form">
+            <div class="corner-ribbon">Secure Upload</div>
+            <div class="form-icon">
+              <i class="fas fa-file-contract"></i>
+            </div>
+            <h2>Document Upload</h2>
+            <form id="termSheetForm" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="documentName">Document Name</label>
+                <input
+                  type="text"
+                  id="documentName"
+                  class="form-control"
+                  placeholder="Enter a name for your document"
+                />
+              </div>
+              <div class="form-group">
+                <label for="documentType">Document Type</label>
+                <select id="documentType" class="form-control">
+                  <option value="">Select document type</option>
+                  <option value="investment">Investment Term Sheet</option>
+                  <option value="merger">Merger & Acquisition</option>
+                  <option value="loan">Loan Agreement</option>
+                  <option value="partnership">Partnership Agreement</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Upload Term Sheet</label>
+                <div class="file-upload">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <div class="file-upload-text">
+                    <p>Drag and drop your file here</p>
+                    <p>or</p>
+                    <span class="btn btn-secondary">Browse Files</span>
+                  </div>
+                  <input
+                    type="file"
+                    id="termSheetFile"
+                    accept=".pdf,.doc,.docx,.txt,.rtf,.odt"
+                  />
+                </div>
+                <div
+                  id="fileName"
+                  class="text-center"
+                  style="margin-top: 10px; font-weight: 500"
+                ></div>
+              </div>
+              <button type="submit" class="btn btn-primary upload-btn">
+                Upload & Proceed
+              </button>
+              <div class="upload-info">
+                <p><strong>Supported file formats:</strong></p>
+                <ul>
+                  <li>PDF (.pdf)</li>
+                  <li>Microsoft Word (.doc, .docx)</li>
+                  <li>Text files (.txt)</li>
+                  <li>Rich Text Format (.rtf)</li>
+                  <li>OpenDocument Text (.odt)</li>
+                </ul>
+                <p><strong>Maximum file size:</strong> 20MB</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Steps Section -->
+    <section class="steps-section">
+      <div class="container">
+        <div class="steps-container">
+          <div class="step-image">
+            <img
+              src="/api/placeholder/600/400"
+              alt="Term Sheet Analysis Process"
+            />
+          </div>
+          <div class="steps-content">
+            <h2>What Happens Next?</h2>
+            <p>
+              After you upload your term sheet document, our system
+              automatically processes it through several stages:
+            </p>
+
+            <div class="step-item">
+              <div class="step-number">1</div>
+              <div class="step-info">
+                <h3>AI Extraction</h3>
+                <p>
+                  Our advanced AI technology extracts all relevant data points
+                  from your document, regardless of format or structure.
+                </p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">2</div>
+              <div class="step-info">
+                <h3>Validation</h3>
+                <p>
+                  The system cross-checks extracted data against industry
+                  standards and your previous documents to identify
+                  inconsistencies.
+                </p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">3</div>
+              <div class="step-info">
+                <h3>Risk Scoring</h3>
+                <p>
+                  A comprehensive fraud risk assessment is performed, providing
+                  you with detailed scoring and potential red flags.
+                </p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">4</div>
+              <div class="step-info">
+                <h3>Notifications</h3>
+                <p>
+                  You'll receive email alerts with validation results and
+                  recommendations for improving your term sheet.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>TermVerify AI</h3>
+            <p>
+              Advanced AI-powered term sheet validation for legal and financial
+              professionals.
+            </p>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="index.html#features">Features</a></li>
+              <li><a href="index.html#how-it-works">How It Works</a></li>
+              <li><a href="index.html#team">Team</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Resources</h3>
+            <ul class="footer-links">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">API Reference</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Tutorials</a></li>
+              <li><a href="#">Support</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <ul class="footer-links">
+              <li>
+                <i class="fas fa-map-marker-alt"></i> Bhavan's Campus, Munish
+                Nagar, Andheri(W), 400058
+              </li>
+              <li><i class="fas fa-phone"></i> 9930309463</li>
+              <li><i class="fas fa-envelope"></i> s.p.i.t@termverifyai.com</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 TermVerify AI. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      // Mobile menu toggle
+      document
+        .getElementById("mobileToggle")
+        .addEventListener("click", function () {
+          document.getElementById("mainNav").classList.toggle("active");
+        });
+
+      // File upload display
+      document
+        .getElementById("termSheetFile")
+        .addEventListener("change", function () {
+          const fileName = this.files[0] ? this.files[0].name : "";
+          document.getElementById("fileName").textContent = fileName;
+        });
+
+      // Form submission
+      document
+        .getElementById("termSheetForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const documentName = document.getElementById("documentName").value;
+          const documentType = document.getElementById("documentType").value;
+          const fileInput = document.getElementById("termSheetFile");
+
+          if (!documentName) {
+            alert("Please enter a document name");
+            return;
+          }
+
+          if (!documentType) {
+            alert("Please select a document type");
+            return;
+          }
+
+          if (!fileInput.files[0]) {
+            alert("Please upload a term sheet document");
+            return;
+          }
+          const formData = new FormData();
+          formData.append("documentName", documentName);
+          formData.append("documentType", documentType);
+          formData.append("document", fileInput.files[0]);
+          // Here you would normally send the data to your server
+          // For demonstration, we'll just show an alert
+
+          try {
+            const response = await fetch("http://localhost:5000/api/extract", {
+              method: "POST",
+              body: formData,
+            });
+
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+
+            const result = await response.json();
+            alert("Document uploaded successfully! Proceeding to analysis...");
+
+            // Simulating redirect to a processing page after upload
+            setTimeout(function () {
+              window.location.href = "processing.html"; // Change this to your desired page
+            }, 1500);
+          } catch (error) {
+            console.error("Error uploading document:", error);
+            alert(
+              "There was an error uploading the document. Please try again."
+            );
+          }
+        });
+    </script>
+  </body>
+</html>
