@@ -93,9 +93,9 @@ Open the HTML files in the `Frontend` directory in your browser.
 Contributions are welcome! Please fork the repository and submit a pull request.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the Apache 2.0 License.
 
 ## Contact
 For any inquiries, please contact:
-- **Email**: s.p.i.t@termverifyai.com
-- **Phone**: 9930309463
+- **Email**: manan.andraskar22@spit.ac.in
+- **Phone**: 8530837267
